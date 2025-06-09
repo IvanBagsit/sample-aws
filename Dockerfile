@@ -1,28 +1,14 @@
-# Use openjdk:17-jdk-slim as base for build and runtime
+# Use an official OpenJDK runtime as a parent image
 FROM openjdk:17-jdk-slim
 
-# Install Maven (since this image doesn't have Maven by default)
-RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
-
-# Set working directory
+# Set the working directory inside the container
 WORKDIR /sample-aws
 
-# Copy pom.xml and download dependencies to cache them
-COPY pom.xml .
+# Copy the jar file into the container
+COPY target/sample-aws-0.0.1-SNAPSHOT.jar sample-aws.jar
 
-RUN mvn dependency:go-offline
-
-# Copy source code
-COPY src ./src
-
-# Build the application
-RUN mvn clean package -DskipTests
-
-# The built jar will be under target folder; copy to app.jar for convenience
-RUN cp target/*.jar sample-aws.jar
-
-# Expose default Spring Boot port
+# Expose the port your app runs on (default 8080)
 EXPOSE 8080
 
-# Run the application
+# Run the jar file
 ENTRYPOINT ["java", "-jar", "sample-aws.jar"]
