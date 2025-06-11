@@ -1,3 +1,12 @@
 spring:
   application:
     name: sample-aws
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    username: ${DB_USER}
+    password: ${DB_PASS}
+    url: jdbc:mysql://${DB_HOST}/${DB_NAME}
+    driverClassName: com.mysql.cj.jdbc.Driver
