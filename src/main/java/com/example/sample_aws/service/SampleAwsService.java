@@ -15,7 +15,7 @@ public class SampleAwsService {
     private final PersonsDao personsDao;
 
     public String getSampleAws() {
-        log.info("GET Service called 123");
+        log.info("GET Service called");
         return "GET SAMPLE AWS";
     }
 
