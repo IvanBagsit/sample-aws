@@ -1,4 +1,4 @@
-name: Run Maven Tests with MySQL on PR to Main
+name: Run Maven Tests on PR to Main
 
 on:
   pull_request:
@@ -8,23 +8,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
-    services:
-      mysql:
-        image: mysql:8
-        env:
-          MYSQL_DATABASE: sample_cloud
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_USER: admin
-          MYSQL_PASSWORD: admin
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd="mysqladmin ping --silent"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -42,18 +25,6 @@ jobs:
             ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-maven
-
-      - name: Wait for MySQL to be ready
-        run: |
-          echo "Waiting for MySQL to be ready..."
-          until mysql -h127.0.0.1 -P3306 -uadmin -padmin -e "SHOW DATABASES;" > /dev/null 2>&1; do
-            sleep 2
-          done
-          echo "MySQL is ready."
-
-      - name: Create table
-        run: |
-          mysql -h127.0.0.1 -P3306 -uadmin -padmin sample_cloud -e "CREATE TABLE persons (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255));"
 
       - name: Run Unit/Integration Tests
         run: mvn test
