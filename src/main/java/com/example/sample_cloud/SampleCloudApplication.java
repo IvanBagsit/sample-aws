@@ -1,13 +1,13 @@
-package com.example.sample_aws;
+package com.example.sample_cloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SampleAwsApplication {
+public class SampleCloudApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SampleAwsApplication.class, args);
+		SpringApplication.run(SampleCloudApplication.class, args);
 	}
 
 }

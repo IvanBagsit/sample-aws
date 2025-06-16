@@ -1,6 +1,6 @@
 spring:
   application:
-    name: sample-aws
+    name: sample-cloud
   jpa:
     show-sql: true
     hibernate:
@@ -8,5 +8,5 @@ spring:
   datasource:
     username: ${DB_USER:admin}
     password: ${DB_PASS:admin}
-    url: jdbc:mysql://${DB_HOST:localhost}/${DB_NAME:sample_aws}
+    url: jdbc:mysql://${DB_HOST:localhost}/${DB_NAME:sample_cloud}
     driverClassName: com.mysql.cj.jdbc.Driver
