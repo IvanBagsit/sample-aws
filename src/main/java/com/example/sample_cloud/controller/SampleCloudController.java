@@ -1,22 +1,14 @@
 package com.example.sample_cloud.controller;
 
-import com.example.sample_cloud.model.Persons;
 import com.example.sample_cloud.service.SampleCloudService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/sample-cloud")
 public class SampleCloudController {
     private final SampleCloudService service;
-
-    @GetMapping("/persons")
-    public List<Persons> getAllPersons() {
-        return service.getAllPersons();
-    }
 
     @GetMapping()
     public String getSampleCloud() {
