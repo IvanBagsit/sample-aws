@@ -13,21 +13,21 @@ public class SampleCloudService {
 
     public String getSampleCloud() {
         log.info("GET Service called");
-        return "GET SAMPLE CLOUD";
+        return "GET SAMPLE CLOUD UPDATED";
     }
 
     public String postSampleCloud() {
         log.info("POST Service called");
-        return "POST SAMPLE CLOUD";
+        return "POST SAMPLE CLOUD UPDATED";
     }
 
     public String putSampleCloud() {
         log.info("PUT Service called");
-        return "PUT SAMPLE CLOUD";
+        return "PUT SAMPLE CLOUD UPDATED";
     }
 
     public String deleteSampleCloud() {
         log.info("DELETE Service called");
-        return "DELETE SAMPLE CLOUD";
+        return "DELETE SAMPLE CLOUD UPDATED";
     }
 }
