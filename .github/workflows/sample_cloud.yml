@@ -27,4 +27,4 @@ jobs:
           restore-keys: ${{ runner.os }}-maven
 
       - name: Run Unit/Integration Tests
-        run: mvn test
+        run: mvn clean verify
