@@ -20,7 +20,7 @@ authenticates local docker to gcloud
 
 create an artifact repository (if not existing):  
 ```gcloud artifacts repositories create sample-cloud-artifact --repository-format=docker --location=us-central1 --description="sample-cloud-docker-image”```  
-NOTE: Image Name for GCP follows a specific naming convention (Google Artifact Registry)
+**Note:** image name for GCP follows a specific naming convention (Google Artifact Registry)
 ```REGION/PROJECT_ID/REPOSITORY/IMAGE_NAME/TAG (optional)```  
 
 build the docker image  
@@ -34,3 +34,9 @@ deploy to cloud run
 
 **Note:** After a few moments, GCP will give you a public HTTPS URL to access the project  
 sample: [https://demo-1037725188793.us-central1.run.app](https://demo-1037725188793.us-central1.run.app/)
+
+### if there will be changes to the project do below instructions  
+1. ```./mvnw clean package -DskipTests```
+2. ```docker build -t us-central1-docker.pkg.dev/sample-cloud-463104/sample-cloud-artifact/demo .```
+3. ```docker push us-central1-docker.pkg.dev/sample-cloud-463104/sample-cloud-artifact/demo```
+4. ```gcloud run deploy demo —image=us-central1-docker.pkg.dev/sample-cloud-463104/sample-cloud-artifact/demo —platform=managed —region=us-central1 —allow-unauthenticated```
