@@ -1,6 +1,6 @@
 spring:
   application:
-    name: sample-aws
+    name: sample-cloud
   jpa:
     show-sql: true
     hibernate:
