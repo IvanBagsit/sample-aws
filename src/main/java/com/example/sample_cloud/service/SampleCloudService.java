@@ -2,6 +2,7 @@ package com.example.sample_cloud.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,23 +12,26 @@ import java.util.List;
 @Slf4j
 public class SampleCloudService {
 
+    @Value("${custom.string.message}")
+    private String message;
+
     public String getSampleCloud() {
         log.info("GET Service called");
-        return "GET SAMPLE CLOUD UPDATED";
+        return String.format("GET SAMPLE | ENV custom.string.message: %s", message);
     }
 
     public String postSampleCloud() {
         log.info("POST Service called");
-        return "POST SAMPLE CLOUD UPDATED";
+        return "POST SAMPLE";
     }
 
     public String putSampleCloud() {
         log.info("PUT Service called");
-        return "PUT SAMPLE CLOUD UPDATED";
+        return "PUT SAMPLE";
     }
 
     public String deleteSampleCloud() {
         log.info("DELETE Service called");
-        return "DELETE SAMPLE CLOUD UPDATED";
+        return "DELETE SAMPLE";
     }
 }

@@ -39,4 +39,8 @@ sample: [https://demo-1037725188793.us-central1.run.app](https://demo-1037725188
 1. ```./mvnw clean package -DskipTests```
 2. ```docker build -t us-central1-docker.pkg.dev/sample-cloud-463104/sample-cloud-artifact/demo .```
 3. ```docker push us-central1-docker.pkg.dev/sample-cloud-463104/sample-cloud-artifact/demo```
-4. ```gcloud run deploy demo --image=us-central1-docker.pkg.dev/sample-cloud-463104/sample-cloud-artifact/demo --platform=managed --region=us-central1 --allow-unauthenticated```
+4. ```gcloud run deploy demo --image=us-central1-docker.pkg.dev/sample-cloud-463104/sample-cloud-artifact/demo --platform=managed --region=us-central1 --allow-unauthenticated```  
+
+# Notes
+1. login to GCP via CLI: ```gcloud auth login```  
+2. set active project_id (no need to specify --project flag every command): ```gcloud config set project [PROJECT_ID]```
