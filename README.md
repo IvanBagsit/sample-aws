@@ -15,20 +15,23 @@ list all projects and project_id available
 
 authenticates local docker to gcloud  
 ```gcloud auth configure-docker```  
-```gcloud auth configure-docker us-central1-docker.pkg.dev```
+```gcloud auth configure-docker us-central1-docker.pkg.dev```  
+
+set default project  
+```gcloud config set project [PROJECT_ID]```  
+
+view current config  
+```gcloud config list```  
 
 create an artifact repository (if not existing):  
-```gcloud artifacts repositories create sample-cloud-artifact --repository-format=docker --location=us-central1 --description="sample-cloud-docker-image”```
+```gcloud artifacts repositories create sample-cloud-artifact --repository-format=docker --location=us-central1 --description="sample-cloud-docker-image”```  
 
 # Notes
 image name for GCP follows a specific naming convention:  
 **Google Artifact Registry (New)**
 ```REGION.pkg.dev/PROJECT_ID/REPOSITORY/IMAGE_NAME[:TAG] (tag is optional)```  
 **Google Container Registry (Old - GCR)**
-```REGION.gcr.io/PROJECT_ID/IMAGE_NAME[:TAG] (tag is optional)```  
-
-set active project_id (no need to specify --project flag every command):  
-```gcloud config set project [PROJECT_ID]```  
+```REGION.gcr.io/PROJECT_ID/IMAGE_NAME[:TAG] (tag is optional)```   
 
 # GKE related commands
 enable GKE API  
@@ -38,7 +41,7 @@ install gke-gcloud-auth-plugin to authenticate kubectl client
 ```sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin```
 
 create GKE cluster  
-```gcloud container clusters create springboot-cluster --num-nodes=1```
+```gcloud container clusters create springboot-cluster```  
 
 create auto-pilot cluster in a free region (e.g., us-central1)
 ```gcloud container clusters create-auto spring-cluster --region us-central1```
