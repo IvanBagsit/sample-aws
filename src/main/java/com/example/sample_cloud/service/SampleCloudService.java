@@ -17,7 +17,7 @@ public class SampleCloudService {
 
     public String getSampleCloud() {
         log.info("GET Service called");
-        return String.format("GET SAMPLE | ENV custom.string.message: %s", message);
+        return String.format("GET SAMPLE GKE! | ENV custom.string.message: %s", message);
     }
 
     public String postSampleCloud() {
