@@ -11,29 +11,74 @@ login/authenticate to gcp
 ```gcloud auth login```
 
 list all projects and project_id available  
-```gcloud projects list```
-
-authenticates local docker to gcloud  
-```gcloud auth configure-docker```  
-```gcloud auth configure-docker us-central1-docker.pkg.dev```  
+```gcloud projects list```  
 
 set default project  
 ```gcloud config set project [PROJECT_ID]```  
 
+authenticates local docker to gcloud  
+```gcloud auth configure-docker```  
+```gcloud auth configure-docker us-central1-docker.pkg.dev```
+
 view current config  
 ```gcloud config list```  
 
+# Level View
+Artifact Registry:  
+```
+Project: sample-cloud-463104
+ └── Location: us-central1
+      └── Repository: sample-cloud-artifact (format: DOCKER)
+           └── Package: demo
+                └── Version: v1.0.0
+                     └── Artifact: docker image layers, metadata, etc.
+```  
+
+GKE:  
+```
+Project: sample-cloud-463104
+ └── Location: us-central1 (regional cluster)
+      └── Cluster: my-gke-cluster
+           └── Node Pool: default-pool
+                └── Nodes: gke-my-gke-cluster-default-pool-abc123
+                     └── Namespace: production
+                          └── Deployment: web-app
+                               └── Pods: web-app-pod-1, web-app-pod-2
+                          └── Service: web-app-service
+```  
+
+Cloud Run:  
+```
+Project: sample-cloud-463104
+ └── Region: us-central1
+      └── Cloud Run Service: my-api-service
+           ├── Revision: my-api-service-00001
+           └── Revision: my-api-service-00002
+           └── Configuration: CPU=1, Memory=512Mi, Env=prod
+           └── Traffic Split: 90% to 00001, 10% to 00002
+```  
+
+# Artifact Registry
 create an artifact repository (if not existing):  
 ```gcloud artifacts repositories create sample-cloud-artifact --repository-format=docker --location=us-central1 --description="sample-cloud-docker-image”```  
 
-# Notes
-image name for GCP follows a specific naming convention:  
-**Google Artifact Registry (New)**
-```REGION.pkg.dev/PROJECT_ID/REPOSITORY/IMAGE_NAME[:TAG] (tag is optional)```  
-**Google Container Registry (Old - GCR)**
-```REGION.gcr.io/PROJECT_ID/IMAGE_NAME[:TAG] (tag is optional)```   
+to check if artifact is using GCR or Artifact Registry
+Artifact Registry  (New) - includes Repository Name / Format / Location
+```gcloud artifacts repositories list --project=sample-cloud-463104```  
+GCR (Google Container Registry - Old)  - includes full image path
+```gcloud container images list --project=sample-cloud-463104```  
 
-# GKE related commands
+list docker images/packages in the specific repository - includes Image Name 
+```gcloud artifacts packages list --repository=sample-cloud-artifact --location=us-central1```  
+
+### Notes
+image name for GCP follows a specific naming pattern:  
+**Google Artifact Registry (New -docker if using docker)**  
+```REGION-docker.pkg.dev/PROJECT_ID/REPOSITORY/IMAGE_NAME[:TAG] (tag is optional)```  
+**Google Container Registry (Old - GCR)**  
+```gcr.io/PROJECT_ID/IMAGE_NAME[:TAG] (tag is optional)```   
+
+# GKE commands
 enable GKE API  
 ```gcloud services enable container.googleapis.com```  
 
