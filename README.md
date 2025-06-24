@@ -95,6 +95,9 @@ list all available clusters
 configure local kubectl to use a cluster  
 ```gcloud container clusters get-credentials YOUR_CLUSTER_NAME --region YOUR_CLUSTER_REGION```  
 
+list compute instances  
+```gcloud compute instances list```
+
 # Helm (Used in Kubernetes)
 1. Install Helm in WSL2
 
@@ -106,14 +109,30 @@ create and cd to a helm chart
 ```cd spring-boot-chart```
 
 # Kubernetes useful Commands
-creates a namespace
+creates a namespace  
 ```kubectl create namespace <name>```
 
-get logs
+get pods  
+```kubectl get pods -n <namespace>```
+
+describe a pod  
+```kubectl describe pod -n <namespace> <pod-name>```
+
+enter a pod  
+```kubectl exec -it -n <namespace> <pod-name> -- /bin/sh```
+
+get logs  
 ```kubectl get logs -n <namespace> <pod-name>```
 
-describe a pod
-```kubectl describe pod -n <namespace> <pod-name>```
+kubectl get service list  
+```kubectl get svc -n <namespace>```
+
+describe service  
+```kubectl describe svc demo-service -n demo-namespace```
+
+creates a deployment/service/pod (requires deployment.yaml)  
+```kubectl apply -f <deployment.yaml>```
+
 
 # Build and run using GCP's Cloud Run
 1. Install and setup gCloud CLI and Docker in WSL2
