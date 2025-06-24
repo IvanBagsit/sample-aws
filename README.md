@@ -1,5 +1,6 @@
 # Description
-this project was created to practice and test containerization like Docker and deployment/use of AWS or GCP
+this project was created to practice and test containerization like Docker and deployment/use of AWS or GCP.  
+below are just notes taken during practice and trial.  
 
 # Build and run using docker locally
 1. run the following to create a new/updated JAR file: "./mvnw clean package -DskipTests"
@@ -86,16 +87,52 @@ install gke-gcloud-auth-plugin to authenticate kubectl client
 ```sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin```
 
 create GKE cluster  
-```gcloud container clusters create springboot-cluster```  
-
-create auto-pilot cluster in a free region (e.g., us-central1)
-```gcloud container clusters create-auto spring-cluster --region us-central1```
+```gcloud container clusters create springboot-cluster```
 
 list all available clusters  
 ```gcloud container clusters list```
 
 configure local kubectl to use a cluster  
 ```gcloud container clusters get-credentials YOUR_CLUSTER_NAME --region YOUR_CLUSTER_REGION```  
+
+list compute instances  
+```gcloud compute instances list```
+
+# Helm (Used in Kubernetes)
+1. Install Helm in WSL2
+
+very helm installation
+```helm version```
+
+create and cd to a helm chart
+```helm create spring-boot-chart```
+```cd spring-boot-chart```
+
+# Kubernetes useful Commands
+creates a namespace  
+```kubectl create namespace <name>```
+
+get pods  
+```kubectl get pods -n <namespace>```
+
+describe a pod  
+```kubectl describe pod -n <namespace> <pod-name>```
+
+enter a pod  
+```kubectl exec -it -n <namespace> <pod-name> -- /bin/sh```
+
+get logs  
+```kubectl get logs -n <namespace> <pod-name>```
+
+kubectl get service list  
+```kubectl get svc -n <namespace>```
+
+describe service  
+```kubectl describe svc demo-service -n demo-namespace```
+
+creates a deployment/service/pod (requires deployment.yaml)  
+```kubectl apply -f <deployment.yaml>```
+
 
 # Build and run using GCP's Cloud Run
 1. Install and setup gCloud CLI and Docker in WSL2
